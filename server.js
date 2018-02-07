@@ -5,12 +5,13 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const { router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const {router: usersRouter} = require('./users');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+const {router: recipieRouter} = require('./recipies/router');
 
 mongoose.Promise = global.Promise;
 
-const { PORT, DATABASE_URL } = require('./config');
+const {PORT, DATABASE_URL} = require('./config');
 
 const app = express();
 
@@ -29,10 +30,11 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
-
-const jwtAuth = passport.authenticate('jwt', { session: false });
+app.use('/api/recipies/', jwtAuth, recipieRouter);
 
 app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({
