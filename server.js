@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-const jwtAuth = passport.authenticate('jwt', { session: false });
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
@@ -43,14 +43,14 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 });
 
 app.use('*', (req, res) => {
-  return res.status(404).json({ message: 'Not Found' });
+  return res.status(404).json({message: 'Not Found'});
 });
 
 let server;
 
 function runServer() {
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, { useMongoClient: true }, err => {
+    mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
       if (err) {
         return reject(err);
       }
@@ -85,4 +85,4 @@ if (require.main === module) {
   runServer().catch(err => console.error(err));
 }
 
-module.exports = { app, runServer, closeServer };
+module.exports = {app, runServer, closeServer};
