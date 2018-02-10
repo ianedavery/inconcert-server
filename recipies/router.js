@@ -17,7 +17,7 @@ router.use(bodyParser.json());
 jwt({secret: config.JWT_SECRET});
 
 router.get('/', (req, res) => {
-	Recipies
+	return Recipies
 	  .find({"createdBy": req.user.username})
 	  .then(recipies => {
 	  	res.json(recipies.map(recipie => recipie.serialize()));
