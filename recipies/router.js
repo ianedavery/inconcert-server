@@ -28,6 +28,19 @@ router.get('/', (req, res) => {
 	  });
 });
 
+router.get('/:id', (req, res) => {
+	console.log(req.params.id);
+	return Recipies
+	  .find({"_id": req.params.id})
+	  .then(recipies => {
+	  	res.json(recipies.map(recipie => recipie.serialize()));
+	  })
+	  .catch(err => {
+	  	console.error(err);
+	  	res.status(500).json({message: 'Internal Server Error'});
+	  });
+});
+
 router.post('/', jsonParser, (req, res) => {
 	const requiredFields = ['name', 'ingredients'];
 	const missingField = requiredFields.find(field => !(field in req.body));
