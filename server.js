@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const morganBody = require('morgan-body');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const {router: usersRouter} = require('./users');
@@ -16,6 +18,10 @@ const {PORT, DATABASE_URL} = require('./config');
 const app = express();
 
 app.use(morgan('common'));
+
+app.use(bodyParser.json());
+
+morganBody(app);
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
