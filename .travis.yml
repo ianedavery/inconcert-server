@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: noCJkjG78ODwbYv9dKBMfEwmbmVIWiUsDIHgKq12cQE3nHe1852pNcF7xt0/7ybkAjXzbfg8TcB7CLwnuF7UNB84Gx/1ew9aoBoj5a1bo/+w0G9mJXw37KzWi0VJvB/yfapa8hl/pbI2sp6ib3q2ozrtg4YTHf3C9J+UQHZIWlq3/llltsV6awEuY/KRoa+K4Pw7MqqbS3d3zwTj3SNH9UDVYvJqn/szomLi63S7jugRCo8O2+fHv0YZ5mNqUqls4YxRadoKemdfZR1C39hC2yzWSZvjVpwkZ3zeeVV4rHFxdxGQTcIObZcuyY9RUmghJY/+o0sB7MwaNhlhceRTHiscEZx2LDeBbLGkEBv0IndInpXtfOhCBYbxTGs26yDc9IMkEo76hKnAqmIO+cPNFjUuM9j/dlyvoS28rdv5alrdL5fAsGUVR9gMrMffgJsr1uyzn9xtr2/oZlIKYsKlaDMj6ffQStmsrQAEimeySEVyE1+14XyQvfD7wOY3CBxV93aCZEfEywUjhnqAAc96DQ9+NVqu7BDjhlhO3DjkQhXdeFyeIcryo9JNiroy7nKJUhPtg18eXzmZBIe0qHokf0XPMi3GXO8uK4Km8P4Wg4YTZWRXgkLuB3m3yIxGMeXJjzj2+NxzIYu6MNy8Usfz6ojxDJP2ESFA3rRt+pjP6js=
+  app: calm-journey-74834
+  on:
+    repo: ianedavery/inconcert-server

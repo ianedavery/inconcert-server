@@ -21,7 +21,7 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-morganBody(app);
+//morganBody(app);
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -42,11 +42,11 @@ app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/recipies/', jwtAuth, recipieRouter);
 
-app.get('/api/protected', jwtAuth, (req, res) => {
+/*app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({
     data: 'rosebud'
   });
-});
+});*/
 
 app.use('*', (req, res) => {
   return res.status(404).json({message: 'Not Found'});
