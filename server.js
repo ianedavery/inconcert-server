@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const morganBody = require('morgan-body');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors');
+const {CLIENT_ORIGIN} = require('./config');
 
 const {router: usersRouter} = require('./users');
 const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
@@ -23,7 +25,13 @@ app.use(bodyParser.json());
 
 //morganBody(app);
 
-app.use(function (req, res, next) {
+app.use(
+    cors({
+        origin: CLIENT_ORIGIN
+    })
+);
+
+/*app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
@@ -31,12 +39,16 @@ app.use(function (req, res, next) {
     return res.send(204);
   }
   next();
-});
+});*/
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
+
+app.get('/api', (req,res) => {
+  res.json({ok: true});
+});
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
