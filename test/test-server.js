@@ -9,7 +9,7 @@ const should = chai.should();
 const {TEST_DATABASE_URL} = require('../config');
 const {Recipies} = require('../recipies/models');
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhOTMzNzE0MTViMmMyMmZmZTM0NjhkNiIsInVzZXJuYW1lIjoiZGhhbmkifSwiaWF0IjoxNTE5NTk3MzMyLCJleHAiOjE1MjAyMDIxMzIsInN1YiI6ImRoYW5pIn0.LgjMRzmAmH93ysA8xcahV5uhI0FEOO9veKEISHSQcXM';
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhOTM1Yjk4MTk1YzE4NGFjZWMwNjBjMiIsInVzZXJuYW1lIjoiZGhhbmkifSwiaWF0IjoxNTE5NjA2NjgwLCJleHAiOjE1MjAyMTE0ODAsInN1YiI6ImRoYW5pIn0.iSIEGUkUcC4cGwnIRf_LGMDepU0YbBJeWSlazBAZM3Y';
 
 chai.use(chaiHttp);
 
