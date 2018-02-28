@@ -47,7 +47,7 @@ passport.use(jwtStrategy);
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.get('/api', (req,res) => {
-  res.json({ok: true});
+  res.json({oh: 'hello'});
 });
 
 app.use('/api/users/', usersRouter);
