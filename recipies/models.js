@@ -26,7 +26,8 @@ RecipieSchema.methods.serialize = function() {
 		id: this._id,
 		name: this.name,
 		ingredients: this.ingredients,
-		instructions: this.instructions
+		instructions: this.instructions,
+		createdBy: this.createdBy
 	};
 };
 

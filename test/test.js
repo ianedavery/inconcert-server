@@ -2,14 +2,13 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const faker = require('faker');
 const mongoose = require('mongoose');
 const {app, runServer, closeServer} = require('../server');
 const should = chai.should();
 const {TEST_DATABASE_URL} = require('../config');
 const {Recipies} = require('../recipies/models');
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhOTM1Yjk4MTk1YzE4NGFjZWMwNjBjMiIsInVzZXJuYW1lIjoiZGhhbmkifSwiaWF0IjoxNTE5NjA2NjgwLCJleHAiOjE1MjAyMTE0ODAsInN1YiI6ImRoYW5pIn0.iSIEGUkUcC4cGwnIRf_LGMDepU0YbBJeWSlazBAZM3Y';
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhOTVlN2UzMWJkNTdhNzc3NWMwMTBlYyIsInVzZXJuYW1lIjoiZW1pbGUifSwiaWF0IjoxNTE5NzczNjY3LCJleHAiOjE1MjAzNzg0NjcsInN1YiI6ImVtaWxlIn0.ymUxqhz-yr4OzvxoGKo4X4rPQR0yP-SixdhdVZ_tG-M';
 
 chai.use(chaiHttp);
 
@@ -27,10 +26,11 @@ function seedRecipiesData() {
   const seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
-      name: faker.lorem.sentence(),
-      createdBy: 'me'
+      name: 'bread',
+      createdBy: 'emile'
     });
   }
+  console.log(seedData);
   return Recipies.insertMany(seedData);
 }
 
@@ -56,7 +56,11 @@ describe('recipies API resource', function() {
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
-  				
+  				res.body.should.have.length.of.at.least(1);
+  				return Recipies.count();
+  			})
+  			.then(count => {
+  				res.body.should.have.lengthOf(count);
   			});
   	});
   });

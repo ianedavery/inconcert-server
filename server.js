@@ -23,7 +23,7 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-//morganBody(app);
+morganBody(app);
 
 app.use(
     cors({
@@ -66,14 +66,14 @@ app.use('*', (req, res) => {
 
 let server;
 
-function runServer() {
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
+    mongoose.connect(databaseUrl, {useMongoClient: true}, err => {
       if (err) {
         return reject(err);
       }
       server = app
-        .listen(PORT, () => {
+        .listen(port, () => {
           console.log(`Your app is listening on port ${PORT}`);
           resolve();
         })
@@ -86,15 +86,16 @@ function runServer() {
 }
 
 function closeServer() {
-  return mongoose.disconnect().then(() => {
-    return new Promise((resolve, reject) => {
-      console.log('Closing server');
-      server.close(err => {
-        if (err) {
-          return reject(err);
-        }
-        resolve();
-      });
+  return mongoose.disconnect()
+    .then(() => {
+      return new Promise((resolve, reject) => {
+        console.log('Closing server');
+        server.close(err => {
+          if (err) {
+            return reject(err);
+          }
+          resolve();
+        });
     });
   });
 }
