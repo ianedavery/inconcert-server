@@ -64,4 +64,55 @@ describe('recipies API resource', function() {
   			});
   	});
   });
+  describe('POST endpoint', function() {
+  	it('should post a new recipie', function() {
+  		const newRecipie = {
+  			name: 'banana bread',
+  			ingredients: []
+  		};
+  		return chai.request(app)
+  			.post('/api/recipies/')
+  			.set('Authorization', 'Bearer ' + token)
+  			.send(newRecipie)
+  			.then(res => {
+  				res.should.have.status(201);
+  			});
+  	});
+  });
+  describe('PUT endpoint', function() {
+  	it('should update recipie', function() {
+  		const updateData = {
+ 			name: 'zucchini bread',
+  			ingredients: []
+  		};
+  		return Recipies
+  			.findOne()
+  			.then(post => {
+  				updateData.id = post.id
+  				return chai.request(app)
+  					.put(`/api/recipies/${post.id}`)
+  					.set('Authorization', 'Bearer ' + token)
+  					.send(updateData);
+  			})
+  			.then(res => {
+  				res.should.have.status(204);
+  			});
+  	});
+  });
+  describe('DELETE endpoint', function() {
+  	it('should delete recipie', function() {
+  		let post;
+  		return Recipies
+  			.findOne()
+  			.then(_post => {
+  				post = _post;
+  				return chai.request(app)
+  					.delete(`/api/recipies/${post.id}`)
+  					.set('Authorization', 'Bearer ' + token);
+  			})
+  			.then(res => {
+  				res.should.have.status(204);
+  			});
+  	});
+  });
 });
