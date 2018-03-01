@@ -86,7 +86,9 @@ router.post('/', jsonParser, (req, res) => {
 		  ingredients: req.body.ingredients,
 		  instructions: req.body.instructions,
 		  createdBy: req.user.username,
-		  public: false
+		  public: false,
+		  rating: 0,
+		  numberOfRatings: 0
 	  })
 	  .then(recipie => res.status(201).json(recipie.serialize()))
 	  .catch(err => {
@@ -102,7 +104,7 @@ router.put('/:id', (req, res) => {
 		});
 	}
 	const updated = {};
-	const updatableFields = ['name', 'ingredients', 'instructions', 'public'];
+	const updatableFields = ['name', 'ingredients', 'instructions', 'public', 'rating', 'numberOfRatings'];
 	updatableFields.forEach(field => {
 		if(field in req.body) {
 			updated[field] = req.body[field];
