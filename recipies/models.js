@@ -22,6 +22,12 @@ const RecipieSchema = mongoose.Schema({
 	public: {
 		type: Boolean,
 		required: true
+	},
+	rating: {
+		type: Number
+	},
+	numberOfRatings: {
+		type: Number
 	}
 });
 
@@ -32,7 +38,9 @@ RecipieSchema.methods.serialize = function() {
 		ingredients: this.ingredients,
 		instructions: this.instructions,
 		createdBy: this.createdBy,
-		public: this.public
+		public: this.public,
+		rating: this.rating,
+		numberOfRatings: this.numberOfRatings
 	};
 };
 
