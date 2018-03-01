@@ -28,6 +28,18 @@ router.get('/', (req, res) => {
 	  });
 });
 
+router.get('/public', (req, res) => {
+	return Recipies
+	  .find({"public": true})
+	  .then(recipies => {
+	  	res.json(recipies.map(recipie => recipie.serialize()));
+	  })
+	  .catch(err => {
+	  	console.error(err);
+	  	res.status(500).json({message: 'Internal Server Error'});
+	  });
+});
+
 router.get('/:id', (req, res) => {
 	console.log(req.params.id);
 	return Recipies
@@ -73,7 +85,8 @@ router.post('/', jsonParser, (req, res) => {
 		  name: req.body.name,
 		  ingredients: req.body.ingredients,
 		  instructions: req.body.instructions,
-		  createdBy: req.user.username
+		  createdBy: req.user.username,
+		  public: false
 	  })
 	  .then(recipie => res.status(201).json(recipie.serialize()))
 	  .catch(err => {
@@ -89,7 +102,7 @@ router.put('/:id', (req, res) => {
 		});
 	}
 	const updated = {};
-	const updatableFields = ['name', 'ingredients', 'instructions'];
+	const updatableFields = ['name', 'ingredients', 'instructions', 'public'];
 	updatableFields.forEach(field => {
 		if(field in req.body) {
 			updated[field] = req.body[field];

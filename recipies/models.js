@@ -18,6 +18,10 @@ const RecipieSchema = mongoose.Schema({
 	createdBy: {
 		type: String,
 		required: true
+	},
+	public: {
+		type: Boolean,
+		required: true
 	}
 });
 
@@ -27,7 +31,8 @@ RecipieSchema.methods.serialize = function() {
 		name: this.name,
 		ingredients: this.ingredients,
 		instructions: this.instructions,
-		createdBy: this.createdBy
+		createdBy: this.createdBy,
+		public: this.public
 	};
 };
 

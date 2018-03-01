@@ -54,12 +54,6 @@ app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/recipies/', jwtAuth, recipieRouter);
 
-/*app.get('/api/protected', jwtAuth, (req, res) => {
-  return res.json({
-    data: 'rosebud'
-  });
-});*/
-
 app.use('*', (req, res) => {
   return res.status(404).json({message: 'Not Found'});
 });
