@@ -27,7 +27,7 @@ function seedRecipiesData() {
   for (let i = 1; i <= 10; i++) {
     seedData.push({
       name: 'bread',
-      createdBy: 'emile',
+      createdBy: '123',
       public: false
     });
   }
