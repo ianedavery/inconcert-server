@@ -52,7 +52,7 @@ app.get('/api', (req,res) => {
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
-app.use('/api/recipies/', /*jwtAuth,*/ recipieRouter);
+app.use('/api/recipies/', jwtAuth, recipieRouter);
 
 app.use('*', (req, res) => {
   return res.status(404).json({message: 'Not Found'});
